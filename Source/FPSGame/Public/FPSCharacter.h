@@ -71,5 +71,6 @@ public:
 	UCameraComponent* GetFirstPersonCameraComponent() const { return CameraComponent; }
 
 	FORCEINLINE void SetIsCarryingObjectiveState(bool NewState) { bIsCarryingObjective = NewState; }
+	FORCEINLINE bool GetIsCarryingObjectiveState() const { return bIsCarryingObjective; }
 };
 
