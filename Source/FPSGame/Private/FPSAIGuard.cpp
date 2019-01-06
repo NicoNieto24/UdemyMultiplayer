@@ -5,6 +5,7 @@
 #include "DrawDebugHelpers.h"
 #include "FPSGameMode.h"
 #include "AI/Navigation/NavigationSystem.h"
+#include "Net/UnrealNetwork.h"
 
 // Sets default values
 AFPSAIGuard::AFPSAIGuard()
@@ -102,7 +103,7 @@ void AFPSAIGuard::SetGuardState(EAIState NewState)
 		return;
 
 	GuardState = NewState;
-	OnStateChange(GuardState);
+	OnRep_GuardState();
 }
 
 void AFPSAIGuard::MoveToNextPatrolPoint()
@@ -120,6 +121,11 @@ void AFPSAIGuard::MoveToNextPatrolPoint()
 	UNavigationSystem::SimpleMoveToActor(GetController(), CurrentPatrolPoint);
 }
 
+void AFPSAIGuard::OnRep_GuardState()
+{
+	OnStateChange(GuardState);
+}
+
 // Called every frame
 void AFPSAIGuard::Tick(float DeltaTime)
 {
@@ -134,5 +140,12 @@ void AFPSAIGuard::Tick(float DeltaTime)
 		if (DistanceToGoal < 100)
 			MoveToNextPatrolPoint();
 	}
+}
+
+void AFPSAIGuard::GetLifetimeReplicatedProps(TArray< FLifetimeProperty > & OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(AFPSAIGuard, GuardState);
 }
 

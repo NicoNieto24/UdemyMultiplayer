@@ -36,6 +36,7 @@ protected:
 
 	FTimerHandle TimerHandle_ResetOrientation;
 
+	UPROPERTY(ReplicatedUsing = OnRep_GuardState)
 	EAIState GuardState;
 
 	UPROPERTY(EditInstanceOnly, Category = "AI")
@@ -64,6 +65,9 @@ protected:
 	void OnStateChange(EAIState NewState);
 
 	void MoveToNextPatrolPoint();
+
+	UFUNCTION()
+	void OnRep_GuardState();
 
 public:	
 	// Called every frame
