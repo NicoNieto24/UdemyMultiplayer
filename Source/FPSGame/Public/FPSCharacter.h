@@ -51,9 +51,10 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "Gameplay")
 	UAnimSequence* FireAnimation;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
+	UPROPERTY(Replicated, BlueprintReadOnly, Category = "Gameplay")
 	uint8 bIsCarryingObjective : 1;
+
+protected:
 
 	/** Fires a projectile. */
 	void Fire();
