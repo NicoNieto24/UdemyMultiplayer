@@ -78,5 +78,7 @@ public:
 
 	FORCEINLINE void SetIsCarryingObjectiveState(bool NewState) { bIsCarryingObjective = NewState; }
 	FORCEINLINE bool GetIsCarryingObjectiveState() const { return bIsCarryingObjective; }
+
+	virtual void Tick(float DeltaTime) override;
 };
 
